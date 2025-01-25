@@ -1,0 +1,11 @@
+- fbf
+- fbf add --note ""
+- fbf add --card ""
+- fbf group
+- fbf join
+- fbf split
+- fbf merge
+- fbf rm
+- fbf cp
+- fbf mv
+- fbf 

@@ -1,11 +1,16 @@
 - fbf
 - fbf add --note ""
-- fbf add --card ""
+- fbf add --card "" --stack ""
 - fbf group
+- fbf stack
+- fbf pluck --note|--card
+- fbf plunk
+- fbf 
 - fbf join
 - fbf split
 - fbf merge
 - fbf rm
 - fbf cp
 - fbf mv
-- fbf 
+- fbf learn --stack
+

@@ -1,16 +1,39 @@
-- fbf
-- fbf add --note ""
-- fbf add --card "" --stack ""
-- fbf group
-- fbf stack
-- fbf pluck --note|--card
-- fbf plunk
-- fbf 
-- fbf join
-- fbf split
-- fbf merge
-- fbf rm
-- fbf cp
-- fbf mv
-- fbf learn --stack
-
+- `ftf`
+- `ft add ""`
+  - `ft add --thing ""`
+  - `ft add --start ""`
+  - `ft add --end ""`
+  - `ft add --deadline ""`
+  - `ft add --recur`
+  - `ft add --comment`
+  - `ft add --tags`
+  - `ft add --rose`
+  - `ft add --burden`
+  - `ft add --group`
+  - `ft add --priority`
+  - `ft add --first`
+  - `ft add --next`
+  - `ft add --files`
+  - `ft add --apps`
+- `ft mod ""`
+  - `ft mod --name ""`
+- `ft rm `
+- `ft mv`
+- `ft cp`
+- `ft group`
+- `ft view`
+  - `ft view --sort`
+  - `ft view --filter`
+    - `ft view --filter "today"`
+    - `ft view --filter "tomorrow"`
+    - `ft view --filter "today+2d"`
+    - `ft view --filter "next"`
+  - `ft view --workload`
+  - `ft view --progress`
+- `ft do ""`
+  - `ft do --track`
+  - `ft do --done`
+- `ft set`
+  - `ft set --workload`
+  - `ft set --workdays`
+- `ft review`

@@ -1,21 +1,33 @@
-hirn draft --note --task --card
+# Basic principles
 
-hirn view
+The idea is to have different files, and file types, that can
+be related in different ways. The main types:
 
-hirn abut
+- note
+- card
+- task
 
-hirn weld
+But I would like to keep things more playful and informal, which is why I'm
+considering using different vocabulary for each type:
 
-hirn chop
+- note → chunk
+- card → glob
+- task → thing
 
-hirn pluck
+Some more concepts:
 
-hirn plunk
+- structural units
+  - clump  → an aggregation of chunks, globs, things, or even other clumps;
+  albeit while keeping the sub-objects discreet
+  - strand → a connection between any object and any other object, basically a link
+  - slab   → source material, i.e. books, articles, etc.
 
-hirn sort
-
-hirn sift
-
-hirn clump
-
-
+- "verbs", i.e. functions
+  - cast   → create an object
+    - `tug cast --chunk --glob --thing --slab`
+  - clump  → connect objects into clumps, i.e. "clump" them together
+  - fuse   → make a clump permanent, i.e. permanently merge the objects into
+  one object
+  - chop   → the opposite of fuse, i.e. turn an object into a clump
+  - pluck  → move some part of an object into its own object
+  - plunk  → move some object into part of another object

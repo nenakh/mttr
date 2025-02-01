@@ -1,33 +1,50 @@
 # Basic principles
 
 The idea is to have different files, and file types, that can
-be related in different ways. The main types:
+be related in different ways. The main object types will look something
+like this:
 
 - note
 - card
 - task
+- source
+- group
 
-But I would like to keep things more playful and informal, which is why I'm
-considering using different vocabulary for each type:
+However, I've decided to use some unconventional language to
+describe objects and actions because:
 
-- note → chunk
-- card → glob
-- task → thing
+1. I hope it will help me break out of conventional thought patterns to open
+me up to new approaches to old problems.
+2. It's more fun.
 
-Some more concepts:
+For these reasons I've decided to map concepts above to a
+more unique vocabulary:
 
-- structural units
-  - clump  → an aggregation of chunks, globs, things, or even other clumps;
-  albeit while keeping the sub-objects discreet
-  - strand → a connection between any object and any other object, basically a link
-  - slab   → source material, i.e. books, articles, etc.
+- chunk → smallest unit of text
+- glob  → flashcard
+  - simple
+  - cloze
+  - occlude
+  - principle
+  - incremental
+- thing → task
+- stuff → source
+- clump → an aggregation of objects into a new object
+- pile  → an explicit collection of objects, like  a folder, but non-exclusive
+- chain → a hierarchical sequence of objects
+- bulk  → an implicit collection of objects
+- 
+
+The obvious metaphor is that of the shaping and forming of matter or
+material.
 
 - "verbs", i.e. functions
-  - cast   → create an object
-    - `tug cast --chunk --glob --thing --slab`
-  - clump  → connect objects into clumps, i.e. "clump" them together
+  - form   → create an object
+    - `mttr form --chunk --glob --thing --stuff --clump --bulk --pile --mass`
   - fuse   → make a clump permanent, i.e. permanently merge the objects into
   one object
-  - chop   → the opposite of fuse, i.e. turn an object into a clump
-  - pluck  → move some part of an object into its own object
+  - part   → the opposite of fuse, i.e. turn an object into a clump
+  - scoop  → move some part of an object into its own object
   - plunk  → move some object into part of another object
+  - behold → view 
+

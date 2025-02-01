@@ -1,7 +1,50 @@
-# tug
+# Basic principles
 
-`tug` is a concept and a shell utility. The concept represents a personal attempt to constructively cope with the frustrations I've experienced using other tools. In particular, I've tended to struggle with the fact that disparate apps are needed to deal with activities that are, for me, deeply interrelated. Notes are tied to resources, tasks to notes, learning to notes and tasks, etc. And yet, we have learning apps, and we have to-do apps, and we have note-taking apps. Although some sort of relational network is possible using different apps, it generally feels convoluted, and ultimately unreliable and brittle.
+The idea is to have different files, and file types, that can
+be related in different ways. The main object types will look something
+like this:
 
-I've also found that my happiness seems to have an inverse relationship with the amount of "stuff" I have, be it physical or digital. Most apps manage to offer both more and less than I want, so I end up with multiple apps, only using a fraction of each to achieve a "whole" system. So many apps also feel like simple window dressing for basic processes and workflows. With `tug` I hope to build a system that is both simple and powerful, flexible and robust.
+- note
+- card
+- task
+- source
+- group
 
-At the moment I'm content to just explore ideas and address my own points of friction. With time I hope that a toolkit and system will emerge that others can benefit from as well.
+However, I've decided to use some unconventional language to
+describe objects and actions because:
+
+1. I hope it will help me break out of conventional thought patterns to open
+me up to new approaches to old problems.
+2. It's more fun.
+
+For these reasons I've decided to map concepts above to a
+more unique vocabulary:
+
+- chunk → smallest unit of text
+- glob  → flashcard
+  - simple
+  - cloze
+  - occlude
+  - principle
+  - incremental
+- thing → task
+- stuff → source
+- clump → an aggregation of objects into a new object
+- pile  → an explicit collection of objects, like  a folder, but non-exclusive
+- chain → a hierarchical sequence of objects
+- bulk  → an implicit collection of objects
+- 
+
+The obvious metaphor is that of the shaping and forming of matter or
+material.
+
+- "verbs", i.e. functions
+  - form   → create an object
+    - `mttr form --chunk --glob --thing --stuff --clump --bulk --pile --mass`
+  - fuse   → make a clump permanent, i.e. permanently merge the objects into
+  one object
+  - part   → the opposite of fuse, i.e. turn an object into a clump
+  - scoop  → move some part of an object into its own object
+  - plunk  → move some object into part of another object
+  - behold → view 
+

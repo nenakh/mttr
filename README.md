@@ -1,179 +1,233 @@
-# MTTR - Matter-based Knowledge Organization System
+# MATTER
 
-## Overview
+MATTER is a CLI-based tool that uses physical matter as a metaphor for organizing cognitive units, processes, and relationships. At its core, MATTER recognizes that various knowledge work activities (documenting, memorizing, referencing, and accomplishing tasks) are fundamentally manifestations of the same thing: text with attributes and relations. The system's power comes from this unifying concept, treating these different activities not as separate domains requiring different tools, but as variations in how we interact with fundamentally similar objects.
 
-MTTR is a command-line knowledge organization system that uses physical matter as its core metaphor. This unconventional approach breaks traditional thought patterns and enables novel approaches to knowledge management through three fundamental concepts: motes (indivisible units), masses (collections of units), and bonds (relationships between objects).
+## Core Philosophy
+
+The system uses "physical matter" as a metaphor for nonphysical, primarily cognitive units and processes. This is reflected in the nonstandard, deliberately idiosyncratic language used to describe objects, their relationships, and the actions that can be performed on them.
+
+### Comparison with Other Software
+
+While applications like Obsidian, LogSeq, and similar tools offer valuable ways to interact with files, choosing any specific application inherently limits certain possibilities while enabling others. MATTER aims to avoid these limitations by providing a more flexible, lower-level approach to knowledge organization. Rather than prescribing specific workflows or treating different activities (like note-taking and task management) as separate domains, it provides fundamental building blocks that users can combine in ways that suit their needs.
 
 ## Core Concepts
 
 ### Base Objects
 
-- `mote` - Indivisible unit of knowledge, task, or learning
-  - Properties determine function (note-like, flashcard-like, task-like)
-  - Format: Markdown with YAML frontmatter
-  - Can be enriched with various property sets
+- **mote**
+  - The most basic, "indivisible" unit
+  - Represents a single unit of text with attributes
+  - The true dimensions of any mote are left to user discretion
+  - Format: Clean, uncluttered text (typically Markdown) with separate YAML metadata
+  - Type determined by attributes: document, memorize, reference, or accomplish
 
-- `mass` - Collection of motes or other masses
-  - Characterized by two core properties:
-    - `dense` (true/false): Whether components are tightly bound
-    - `ordered` (true/false): Whether sequence matters
-  - Four fundamental types:
-    - Note-like (dense + ordered): Sequential reading, tight narrative flow
-    - Folder-like (sparse + disordered): Loose grouping, flexible organization
-    - Idea chain (sparse + ordered): Sequential but loose, connected thoughts
-    - Default dense (dense + disordered): Tightly related, no specific sequence
+- **mass**
+  - Any aggregate of motes and other masses
+  - Structure determined by the bonds between components
+  - Can represent various organizational concepts across all activity types
 
-- `bond` - Explicit relationship between objects
-  - Independent objects that can be modified separately
-  - Multiple bonds can exist between the same objects
-  - Properties include type, strength, directionality
-  - Visual properties for network representation
+- **bond**
+  - Connections between any two objects (motes-motes, masses-masses, or motes-masses)
+  - Treated as first-class objects with their own properties
+  - Multiple bonds can exist between any object pair, each representing different relationship contexts
+  - Stored in YAML metadata, keeping content files clean and flexible
+
+### Multiple Bonds: A Key Feature
+
+MATTER's handling of bonds sets it apart from other tools:
+- Any two objects can share multiple distinct relationships
+- Each bond can represent a different context or type of relationship
+- Bonds are stored entirely in metadata, allowing for:
+  - Clean, uncluttered content files
+  - Rich relationship metadata without compromising readability
+  - Easy linking of any file type without modifying content
+  - Flexible relationship types that can be added or modified without touching content
+  - Multiple organizational schemes operating simultaneously
 
 ### Properties
 
-Properties determine what can be done with an object. Objects can have multiple property sets:
+Every object (motes, masses, and bonds) can have multiple properties that determine their function and behavior. Two key properties unique to bonds shape the structure of masses:
 
+- **dense** (true/false)
+  - Determines how tightly bound components are
+  - Affects how objects are treated in operations
+
+- **ordered** (true/false)
+  - Determines if sequence matters
+  - Influences how objects are processed and displayed
+
+This creates four fundamental relationship types:
+
+1. **Ordered and Dense**
+   - Document: Composite notes with tight narrative flow
+   - Memorize: Sequential, tightly related cards
+   - Accomplish: Interdependent task clusters
+   - Reference: Structured source material analysis
+
+2. **Ordered but Sparse**
+   - Document: Sequential ideas with loose connections
+   - Memorize: Learning sequences
+   - Accomplish: Sequential but independent tasks
+   - Reference: Timeline-based references
+
+3. **Dense but Unordered**
+   - Document: Related notes without sequence
+   - Memorize: Themed study materials
+   - Accomplish: Related but flexible-order tasks
+   - Reference: Thematically grouped sources
+
+4. **Sparse and Unordered**
+   - Document: Loosely linked notes
+   - Memorize: Generally related study items
+   - Accomplish: Independent tasks
+   - Reference: Loosely related sources
+
+### YAML-based Metadata
+
+Metadata is deliberately separated from content files for:
+- Cleaner writing experience without inline links or markers
+- More flexible metadata application
+- Ability to add metadata to diverse file types
+- Enhanced querying and manipulation capabilities
+- Support for multiple simultaneous organizational schemes
+
+Example metadata structure:
 ```yaml
-# Note-like properties
-content: markdown    # Primary content
-tags: []            # For organization
-modified: datetime  # Last modified time
-
-# Mass properties
+# mote.yaml
+type: document  # or memorize, reference, accomplish
+content_file: content.md
 properties:
-  dense: true/false     # Whether components are tightly bound
-  ordered: true/false   # Whether sequence matters
-components:
-  - id: mote123
-    type: mote
-    sequence: 1  # Only if ordered: true
-
-# Bond properties
-properties:
-  category: reference/dependency/contradiction/support
-  strength: 0.8
-  bidirectional: true/false
-  visual:
-    color: "#4A90E2"
-    thickness: 2
-    style: "solid"
-objects:
-  - id: obj_x
-    role: source
-  - id: obj_y
-    role: target
+  created: 2024-02-20
+  modified: 2024-02-20
+  tags: []
+bonds:
+  - id: bond_123
+    target: mote_456
+    properties:
+      dense: true
+      ordered: true
+      context: "continues from"
+  - id: bond_124
+    target: mote_456
+    properties:
+      dense: false
+      ordered: false
+      context: "related concept"
 ```
-
-### Link Management
-
-MTTR supports both inline and metadata-based linking:
-
-1. Creation using familiar wiki-style brackets:
-   ```markdown
-   This is a reference to [[another_note]]
-   ```
-
-2. Optional scrubbing to clean text while preserving links:
-   ```yaml
-   # After mttr scour --links
-   links:
-     - target: another_note
-       bond: bond_123
-       reference:
-         text: "another_note"
-         context: "reference to {text}"
-         original_markup: "[[another_note]]"
-   ```
-
-3. Link integrity checking and repair options if text changes
 
 ## Core Functions
 
-### System Initialization
+### System Operations
 
 ```bash
-mttr crystallize .              # Initialize directory as mttr workspace
+mttr coalesce   # Initialize a directory as a MATTER space
+  --connect     # Connect with other spaces
+  --import      # Import existing files
+  --template    # Specify metadata templates
+
+mttr form       # Create and modify objects
+  --mote       # Create atomic unit
+  --mass       # Create collection
+  --bond       # Create relationship
+  --type       # Specify object type
+  --properties # Set object properties
+
+mttr void       # Remove or break down objects
+  --dissolve   # Break mass into components
+  --clean      # Remove orphaned metadata
+  --preserve   # Keep content while removing structure
+
+mttr reveal     # Show relationships and launch interactions
+  --bonds      # Show connections
+  --path       # Trace path between objects
+  --context    # Filter by relationship context
+  --visualize  # Generate network visualization
 ```
 
-### Object Creation
+### Activity-Specific Operations
+
+Different activities (document, memorize, reference, accomplish) are handled through property variations rather than separate commands:
 
 ```bash
-mttr form --mote [options]     # Create atomic unit
-mttr form --mass [options]     # Create collection
-  --dense                      # Make tightly bound
-  --ordered                    # Make sequence matter
-mttr form --bond [options]     # Create relationship
-  --type <type>               # Set bond type
-  --source <obj>              # Set source object
-  --target <obj>              # Set target object
-```
+# Creating a document mote
+mttr form --mote --type document
 
-### Object Analysis
+# Creating a flashcard
+mttr form --mote --type memorize
 
-```bash
-mttr reveal [options] <object>
-  --bonds    Show connections
-  --orphans  Show isolated objects
-  --similar  Find related content
-  --stats    Show metadata
-```
+# Creating a reference entry
+mttr form --mote --type reference
 
-### Link Management
+# Creating a task
+mttr form --mote --type accomplish
 
-```bash
-mttr scour --links <object>    # Move brackets to metadata
-mttr restore --links <object>  # Restore brackets in text
-```
-
-### Object Manipulation
-
-```bash
-mttr fuse [options] <objects...>    # Combine objects
-mttr split [options] <object>       # Divide object
-mttr scour [options] <object>       # Clean/normalize
+# Creating a mass of related items
+mttr form --mass --dense true --ordered false
 ```
 
 ## File Organization
 
 ```plaintext
-~/.mttr/
+~/.matter/
   objects/
     motes/
       <uuid>/
-        content.md      # Primary content
-        metadata.yaml   # Metadata and properties
+        content.md     # Clean, uncluttered content
+        metadata.yaml  # Properties, bonds, and attributes
     masses/
       <uuid>/
-        metadata.yaml   # Mass properties and components
+        metadata.yaml  # Mass properties and components
     bonds/
       <uuid>/
-        metadata.yaml   # Bond properties and objects
+        metadata.yaml  # Bond properties and connected objects
   indexes/
-    by-type/         # Type-based lookups
-    by-tag/          # Tag-based lookups
-    temporal/        # Time-based lookups
-  templates/         # Templates for different property sets
+    by-type/        # Activity type lookups
+    by-tag/         # Tag-based organization
+    temporal/       # Time-based organization
+  templates/        # Templates for different activity types
+  spaces/           # Connected MATTER spaces
 ```
 
 ## Implementation Notes
 
-1. File Management
-   - All files maintain human-readable names
-   - UUIDs only appear in metadata YAML files
-   - File operations should occur through mttr framework
-   - `reveal --orphans` helps identify detached files
-   - Git handles version control
+### Content Management
+- Content files remain clean and readable
+- No inline links or special syntax
+- All relationships handled through metadata
+- Standard Markdown for content
+- Version control through Git
 
-2. Content Handling
-   - Primary content format is Markdown
-   - Links can be inline or metadata-based
-   - Link integrity checking on text changes
-   - Media handling through Markdown renderer
+### Relationship Management
+- Multiple bonds between objects
+- Rich metadata for each bond
+- Context-aware relationships
+- Flexible organization schemes
+- Path tracing and discovery
 
-3. Future Extensions
-   - Plugin system for extending functionality
-   - Custom property set definitions
-   - Complex query language
-   - Integration hooks for external tools
-   - Web interface for visualization
-   - Collaboration features
+### Future Development
+- Query language for relationship exploration
+- Visualization tools for network navigation
+- Plugin system for extended functionality
+- Integration with external tools
+- Import/export capabilities
+- Backup and synchronization options
+
+## Capabilities
+
+MATTER aims to:
+- Provide a unified approach to managing cognitive work
+- Handle different activity types as variations of the same fundamental unit
+- Enable multiple simultaneous organizational schemes through rich bond metadata
+- Maintain clean, uncluttered content files while supporting complex relationships
+- Reveal connections in useful and interesting ways
+
+## Network Visualization
+
+Rather than attempting to visualize entire networks, which can be overwhelming and of limited utility, MATTER focuses on systematic exploration of connections:
+- Trace specific paths between objects
+- Filter relationships by context
+- Form new masses from discovered paths
+- Explore connections through different lenses
+- Focus on relevant subsets of the network
+
+Through this approach, MATTER helps users discover and understand connections while avoiding the cognitive overhead of complete network visualization.
